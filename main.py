@@ -6,7 +6,9 @@ class Shop:
         "1003": ["phone", 100, 180, False],
     }
 
-    def __init__(self, password=password):
+    def __init__(self, password=password, money=0, ok=False):
+        self.ok = ok
+        self.money = money
         self.password = password
 
     def Login(self):
@@ -95,13 +97,16 @@ class Shop:
                     val = self.product.get(key)
                     if val is None:
                         print(f"You choose not available item")
-                        continue
-                    else:
-
-                        self.product[key][1] = self.product[key][1] - 1
-                        self.product[key][3] = True
-                        print("You place the order!")
                         break
+                    else:
+                        if self.money > self.product[key][2]:
+                            self.product[key][1] = self.product[key][1] - 1
+                            self.product[key][3] = True
+                            print("You place the order!")
+                            break
+                        else:
+                            print("You dont have enough money!")
+                            break
 
             elif qus == "3":
                 while True:
@@ -121,6 +126,29 @@ class Shop:
                             break
 
             elif qus == "4":
+                if self.ok:
+                    print("You can't take more money!")
+                    s.User()
+                else:
+                    pass
+                while True:
+                    print(f"You currency money is {self.money}")
+                    self.money = input("Enter how much money you like to have (0-1000): ")
+                    if self.money.isdigit():
+                        self.money = int(self.money)
+                        if self.money <= 1000:
+                            print("Your money update!")
+                            self.ok = True
+                            break
+                        else:
+                            print("Pls pick a number under 1000!")
+                            self.money = 0
+                            break
+                    else:
+                        print("Pls pick a number! next time!")
+                        continue
+
+            elif qus == "5":
                 print("Logout succeeded")
                 s.Login()
             else:
@@ -158,7 +186,8 @@ class Shop:
         print("1. Display Product")
         print("2. Place order")
         print("3. Cancel order")
-        print("4. Logout")
+        print("4. Add money")
+        print("5. Logout")
         print("====================")
 
 
