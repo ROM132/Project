@@ -1,9 +1,9 @@
 class Shop:
     password = "1234"
     product = {
-        "1001": ["keyboard", 100, 180],
-        "1002": ["mouse", 100, 180],
-        "1003": ["phone", 100, 180],
+        "1001": ["keyboard", 100, 180, False],
+        "1002": ["mouse", 100, 180, False],
+        "1003": ["phone", 100, 180, False],
     }
 
     def __init__(self, password=password):
@@ -82,7 +82,50 @@ class Shop:
                 continue
 
     def User(self):
-        print("user")
+        while True:
+            s.user()
+            qus = input("What you want to do?: ")
+            if qus == "1":
+                for key in self.product:
+                    print(key, ' : ', self.product[key])
+            elif qus == "2":
+                while True:
+                    qus = input("Enter the id you want to buy: ")
+                    key = qus
+                    val = self.product.get(key)
+                    if val is None:
+                        print(f"You choose not available item")
+                        continue
+                    else:
+
+                        self.product[key][1] = self.product[key][1] - 1
+                        self.product[key][3] = True
+                        print("You place the order!")
+                        break
+
+            elif qus == "3":
+                while True:
+                    qus = input("Enter the id you want to cancel: ")
+                    key = qus
+                    val = self.product.get(key)
+                    if val is None:
+                        print(f"You choose not available item")
+                        continue
+                    else:
+                        if self.product[key][3]:
+                            self.product[key][1] = self.product[key][1] + 1
+                            print("You cancel the order!")
+                            break
+                        else:
+                            print("You dont order this!")
+                            break
+
+            elif qus == "4":
+                print("Logout succeeded")
+                s.Login()
+            else:
+                print("Invalid input! try again")
+                continue
 
     def Admin_check(self):
         try_password = 3
@@ -108,6 +151,14 @@ class Shop:
         print("4. All Product available")
         print("5. Total Income")
         print("6. Logout")
+        print("====================")
+
+    def user(self):
+        print("====================")
+        print("1. Display Product")
+        print("2. Place order")
+        print("3. Cancel order")
+        print("4. Logout")
         print("====================")
 
 

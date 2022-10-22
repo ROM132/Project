@@ -1,0 +1,270 @@
+Index: READEME.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/READEME.md b/READEME.md
+--- a/READEME.md	(revision 25c08892d76fbcdc5c2429a629da4eedf958325f)
++++ b/READEME.md	(revision 7e49e80b0fcea13662c4f121361f697da219918d)
+@@ -1,0 +1,1 @@
++#this is all my project!
+\ No newline at end of file
+Index: main.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/main.py b/main.py
+--- a/main.py	(revision 25c08892d76fbcdc5c2429a629da4eedf958325f)
++++ b/main.py	(revision 7e49e80b0fcea13662c4f121361f697da219918d)
+@@ -1,0 +1,115 @@
++class Shop:
++    password = "1234"
++    product = {
++        "1001": ["keyboard", 100, 180],
++        "1002": ["mouse", 100, 180],
++        "1003": ["phone", 100, 180],
++    }
++
++    def __init__(self, password=password):
++        self.password = password
++
++    def Login(self):
++        user_choice = input("Login Admin/Login User  [Type A to Login in Admin/ Type U to login in the User]: ").lower()
++        if user_choice == "a":
++            s.Admin_check()
++        elif user_choice == "u":
++            s.User()
++        else:
++            print("Invalid input try again!")
++            s.Login()
++
++    def Admin(self):
++        print("welcome back Rom!")
++        print("What you want to do today?")
++        while True:
++            s.Menu()
++            qus = input("What you want to do?: ")
++            if qus == "1":
++                for key in self.product:
++                    print(key, ' : ', self.product[key])
++            elif qus == "2":
++                while True:
++                    id_ = input("Enter the id: ")
++                    product_name = input("Enter product name: ")
++                    product_quantity = input("Enter product quantity: ")
++                    product_price = input("Enter product price: ")
++                    if product_price.isdigit() and product_price.isdigit() or product_price.isdigit() or product_quantity.isdigit():
++                        product_price = int(product_price)
++                        product_quantity = int(product_quantity)
++                    else:
++                        print("Pls enter a number next time in the quantity and the price!")
++
++                    for item in self.product:
++                        if self.product[item][0] == product_name and item == id_:
++                            print("You already have this id and this name try again!")
++                            break
++                        elif self.product[item][0] == product_name:
++                            print("You already have this product name try again!")
++                            break
++                        elif item == id_:
++                            print("You already have this id try again!")
++                            break
++
++                    add_product = f"{id_}: [{product_name}, {product_price}]"
++                    self.product[id_] = [product_name, product_quantity, product_price]
++                    break
++
++            elif qus == "3":
++                remove_id = input("Enter the id you want to delete: ")
++                for key, value in list(self.product.items()):
++                    if key == remove_id:
++                        print(f"id {remove_id} removed succeeded")
++                        del self.product[key]
++                        s.Admin()
++                print("The id do not found!")
++
++            elif qus == "4":
++                my_available = 0
++                for key in self.product:
++                    my_available += int(self.product[key][1])
++                print(my_available)
++            elif qus == "5":
++                my_available = 0
++                for key in self.product:
++                    my_available += int(self.product[key][2]) * int(self.product[key][1])
++                print(my_available)
++            elif qus == "6":
++                print("Logout succeeded")
++                s.Login()
++            else:
++                print("Invalid input try again!")
++                continue
++
++    def User(self):
++        print("user")
++
++    def Admin_check(self):
++        try_password = 3
++        while True:
++            password = input("Enter the password: ")
++            if password == self.password:
++                s.Admin()
++            else:
++                try_password -= 1
++                if try_password == 0:
++                    print("You ran out of attempt! you are blocked!")
++                    exit()
++                else:
++                    pass
++                print(f"Incorrect password! {try_password} more attempt left!")
++                continue
++
++    def Menu(self):
++        print("====================")
++        print("1. Display Product")
++        print("2. Add Product")
++        print("3. Remove Product")
++        print("4. All Product available")
++        print("5. Total Income")
++        print("6. Logout")
++        print("====================")
++
++
++s = Shop()
++s.Login()
+\ No newline at end of file
+Index: pizza shop.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pizza shop.py b/pizza shop.py
+--- a/pizza shop.py	(revision 25c08892d76fbcdc5c2429a629da4eedf958325f)
++++ b/pizza shop.py	(revision 7e49e80b0fcea13662c4f121361f697da219918d)
+@@ -1,0 +1,124 @@
++import time
++
++
++class Pizza_Shop:
++    pizza_option = {
++        "small pizza": ["small pizza", 11],
++        "medium pizza": ["medium pizza", 16],
++        "large pizza": ["large pizza", 21],
++    }
++
++    pizza_extras = {
++        "olives": ["olives", 4],
++        "tuna": ["tuna", 3],
++        "corn": ["corn", 5],
++    }
++    print("Welcome to our pizza shop!\n"
++          "##########################")
++
++    def __init__(self, pizza=None, money=0, qus=None):
++        self.pizza = pizza
++        self.money = money
++        self.qus = qus
++
++    def money_handler(self):
++        self.money = input("How much dollar you brought with you today?: ")
++        time.sleep(2)
++        if self.money.isdigit():
++            self.money = int(self.money)
++            p.before_buy_pizza()
++        else:
++            print("Pls enter a number next time!")
++            p.money_handler()
++
++    def before_buy_pizza(self):
++        print(f"oh i see you brought with you {self.money} dollar today")
++        time.sleep(2)
++        print("What you like to buy? ")
++        p.print_pizza()
++
++    def print_pizza(self):
++        my_keys = ""
++        for key in self.pizza_option:
++            my_keys += key + ", "
++        print(my_keys)
++        p.buy_pizza()
++
++    def buy_pizza(self):
++        self.qus = input(": ")
++        key = self.qus
++        val = self.pizza_option.get(key)
++        if val is None:
++            print(f"You choose not available item")
++            p.buy_pizza()
++        else:
++            price = self.pizza_option[key][1]
++            if self.qus == self.pizza_option[self.qus][0]:
++                print(f"Ok the {self.qus} cost {self.pizza_option[key][1]} dollar")
++                while True:
++                    self.qus = input("are you sure you want to buy it? (y/n):  ").lower()
++                    if self.qus == "y" and self.money >= price:
++                        time.sleep(1)
++                        self.pizza = self.pizza_option[key][1]
++                        self.money = self.money - price
++                        p.print_extras()
++                    elif self.qus == "n":
++                        print("Ok good bey!")
++                        exit()
++                    elif self.qus == "y" and self.money < price:
++                        print("You dont have enough money try to buy other pizza!")
++                        p.before_buy_pizza()
++                    else:
++                        print("Invalid input try again!")
++            else:
++                print("That not one of our option pls try again!")
++                p.buy_pizza()
++
++    def add_extras(self):
++        self.qus = input(": ")
++        key = self.qus
++        val = self.pizza_extras.get(key)
++        if val is None:
++            print(f"You choose not available item")
++            p.add_extras()
++        else:
++            extra = self.pizza_extras[key][0]
++            extra_cost = self.pizza_extras[key][1]
++            if self.qus == self.pizza_extras[key][0]:
++                while True:
++                    print(f"Ok the {extra} cost {extra_cost} dollar are you sure?")
++                    self.qus = input("(yes/no): ")
++                    if self.qus == "yes" and self.money > extra_cost:
++                        print("Ok wait a second while we add it!")
++                        time.sleep(3)
++                        print(f"Ok we add the {extra} to your pizza")
++                        print("Enjoy!\nGood bey!")
++                        exit()
++                    elif self.qus == "no":
++                        print("Ok pick something else!")
++                        p.print_extras()
++                    elif self.qus == "yes" and self.money < extra_cost:
++                        print("You dont have enough money!")
++                        time.sleep(2)
++                        p.print_extras()
++                    else:
++                        print("Invalid input try again!")
++
++            elif self.qus == "none":
++                print(f"Ok you got the {self.pizza} good bey and enjoy!")
++                exit()
++            else:
++                print("Invalid input try again!")
++                p.add_extras()
++
++    def print_extras(self):
++        print("What you want to add to the pizza?")
++        my_keys_ = ""
++        for key_ in self.pizza_extras:
++            my_keys_ += key_ + ", "
++        print(my_keys_ + "or none")
++        p.add_extras()
++
++
++p = Pizza_Shop()
++p.money_handler()
+\ No newline at end of file
